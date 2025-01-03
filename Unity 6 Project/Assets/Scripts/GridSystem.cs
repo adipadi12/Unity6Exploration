@@ -7,7 +7,6 @@ public class GridSystem
     private int width;
     private int height;
     private float cellSize;
-
     public GridSystem(int width, int height, float cellSize)
     {
         this.width = width;
@@ -54,4 +53,5 @@ public class GridSystem
         Color[] colors = { Color.red, Color.green, Color.blue, Color.clear};
         return colors[Random.Range(0, colors.Length)];
     }
+
 }
