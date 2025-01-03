@@ -29,7 +29,7 @@ public class GridSystem
         return new Vector2Int(x, z);
     }
 
-    // Creates the grid objects (tiles) and places them in the scene
+    // Creates the tiles and places them in the scene
     public void CreateGridObjects(Transform tilePrefab, Transform parent)
     {
         Quaternion tileRotation = tilePrefab.rotation; //to instantiate the tiles in their rotated form
@@ -51,7 +51,7 @@ public class GridSystem
     // Generates a random color for tiles
     private Color RandomColor()
     {
-        Color[] colors = { Color.red, Color.green, Color.blue };
+        Color[] colors = { Color.red, Color.green, Color.blue, Color.clear};
         return colors[Random.Range(0, colors.Length)];
     }
 }

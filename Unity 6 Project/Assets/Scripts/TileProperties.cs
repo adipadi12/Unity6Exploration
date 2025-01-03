@@ -18,7 +18,7 @@ public class TileProperties : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log($"Tile clicked: {tileColor}");
+       // Debug.Log($"Tile clicked: {tileColor}");
         HighlightTile();
     }
 
