@@ -45,29 +45,26 @@ public class TileProperties : MonoBehaviour
         }
         else
         {
+            // Reset the color of the previously selected tile before selecting a new one
+            prevTile.ResetColor();
+
             // A tile was previously selected, and now another tile is clicked
             selectedTile = this;
+            audioSource.PlayOneShot(clickingSound);
             HighlightTile();
-            //prevTile = this;
-            //ResetColor();
 
             // Check for adjacency and color match
             if (IsAdjacent(prevTile, selectedTile) &&
                 prevTile.tileColor == selectedTile.tileColor)
             {
-                DestroyTiles(prevTile, selectedTile);   
-            }
-            else
-            {
-                // Reset the previous tile's highlight if no match
-                prevTile.ResetColor();
+                DestroyTiles(prevTile, selectedTile);
             }
 
-            // Reset the selection
-            prevTile = null;
-            selectedTile = null;
+            // Update the previous tile to the current tile
+            prevTile = selectedTile;
         }
     }
+
 
     private void HighlightTile()
     {
