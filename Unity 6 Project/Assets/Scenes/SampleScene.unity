@@ -150,6 +150,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 727441603131147693, guid: 73b4cae2a65cad9418a45370bb42895d, type: 3}
   gridParent: {fileID: 1339835382}
+  materials:
+  - {fileID: 2100000, guid: 1f923188fe29f8749bc6f8ab3cdb6482, type: 2}
+  - {fileID: 2100000, guid: 5e578474304dc054491f97b1064e4627, type: 2}
+  - {fileID: 2100000, guid: 942f1d5c607d80344942958cd5eea190, type: 2}
+  - {fileID: 2100000, guid: b85ea157cc18db747a6507d0c91e6bed, type: 2}
 --- !u!4 &155563327
 Transform:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 public class TileProperties : MonoBehaviour
 {
     private Renderer tileRenderer;
-    private Color tileColor;
+    private Material tileMaterial;
     
     private static TileProperties prevTile; // Tracks the previously selected tile
     private static TileProperties selectedTile; // Tracks the currently selected 
@@ -17,10 +17,17 @@ public class TileProperties : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void InitializeTile(Color color)
+    public void InitializeTile(Material material)
     {
-        tileColor = color;
-        tileRenderer.material.color = color;
+        if (material != null)
+        {
+            tileMaterial = material;
+            tileRenderer.material = material;
+        }
+        else
+        {
+            Debug.LogError("Material is null. Check your material list.");
+        }
     }
 
     private void OnMouseDown()
@@ -46,7 +53,7 @@ public class TileProperties : MonoBehaviour
         else
         {
             // Reset the color of the previously selected tile before selecting a new one
-            prevTile.ResetColor();
+            prevTile.ResetMaterial();
 
             // A tile was previously selected, and now another tile is clicked
             selectedTile = this;
@@ -55,7 +62,7 @@ public class TileProperties : MonoBehaviour
 
             // Check for adjacency and color match
             if (IsAdjacent(prevTile, selectedTile) &&
-                prevTile.tileColor == selectedTile.tileColor)
+                prevTile.tileMaterial == selectedTile.tileMaterial)
             {
                 DestroyTiles(prevTile, selectedTile);
             }
@@ -68,12 +75,12 @@ public class TileProperties : MonoBehaviour
 
     private void HighlightTile()
     {
-        tileRenderer.material.color = Color.yellow; // Highlight tile
+        tileRenderer.material.color = Color.black; // Highlight tile
     }
 
-    private void ResetColor()
+    private void ResetMaterial()
     {
-        tileRenderer.material.color = tileColor; // Reset to the original color
+        tileRenderer.material = tileMaterial; // Reset to the original color
     }
 
     private void DestroyTiles(TileProperties tile1, TileProperties tile2)

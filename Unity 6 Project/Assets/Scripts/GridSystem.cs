@@ -7,11 +7,13 @@ public class GridSystem
     private int width;
     private int height;
     private float cellSize;
-    public GridSystem(int width, int height, float cellSize)
+    private List<Material> materials;
+    public GridSystem(int width, int height, float cellSize, List<Material> materials)
     {
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;
+        this.materials = materials;
     }
 
     // Converts grid coordinates to world position
@@ -41,17 +43,21 @@ public class GridSystem
                 TileProperties tile = tileTransform.GetComponent<TileProperties>();
                 if (tile != null)
                 {
-                    tile.InitializeTile(RandomColor());
+                    tile.InitializeTile(RandomMaterial());
                 }
             }
         }
     }
 
     // Generates a random color for tiles
-    private Color RandomColor()
+    private Material RandomMaterial()
     {
-        Color[] colors = { Color.red, Color.green, Color.blue, Color.clear};
-        return colors[Random.Range(0, colors.Length)];
+        if (materials != null && materials.Count > 0)
+        {
+            return materials[Random.Range(0, materials.Count)];
+        }
+        Debug.LogError("Material list is empty. Assign materials in the LevelGrid script.");
+        return null;
     }
 
 }
