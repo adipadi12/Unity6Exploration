@@ -9,6 +9,7 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private Transform gridParent; // Parent object to organize tiles
     //[SerializeField] private Button restartButton;
     [SerializeField] private List<Material> materials;
+    [SerializeField] private float scale = 1.1f;
 
     private GridSystem gridSystem;
 
@@ -20,7 +21,7 @@ public class LevelGrid : MonoBehaviour
             return;
         }
 
-        gridSystem = new GridSystem(7, 7, 1f, materials); // Create a 7x7 grid with a cell size of 1 unit
+        gridSystem = new GridSystem(7, 7, scale, materials); // Create a 7x7 grid with a cell size of 1 unit
         gridSystem.CreateGridObjects(tilePrefab, gridParent); // Generate grid tiles
     }
 

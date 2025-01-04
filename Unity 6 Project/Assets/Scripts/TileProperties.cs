@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TileProperties : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class TileProperties : MonoBehaviour
     private static TileProperties selectedTile; // Tracks the currently selected 
 
     [SerializeField] private AudioClip clickingSound;
+    private float scale = 1.1f;
     private AudioSource audioSource;
     private void Awake()
     {
@@ -96,9 +98,17 @@ public class TileProperties : MonoBehaviour
         Vector3 pos1 = tile1.transform.position;
         Vector3 pos2 = tile2.transform.position;
 
-        // Check adjacency (only horizontal, vertical or diagonal neighbors)
-        return (Mathf.Abs(pos1.x - pos2.x) == 1f && pos1.z == pos2.z) || // Horizontal neighbor
-               (Mathf.Abs(pos1.z - pos2.z) == 1f && pos1.x == pos2.x) || // Vertical neighbor
-               (Mathf.Abs(pos1.x - pos2.x) == 1f && Mathf.Abs(pos1.z - pos2.z) == 1f);   //diagnol neighbour
+        // Calculate differences in x and z
+        float diffX = Mathf.Abs(pos1.x - pos2.x);
+        float diffZ = Mathf.Abs(pos1.z - pos2.z);
+
+        // Floating-point precision threshold
+        float threshold = 0.05f;
+
+        // Check for adjacency
+        return (Mathf.Abs(diffX - scale) <= threshold && diffZ <= threshold) || // Horizontal neighbor
+               (Mathf.Abs(diffZ - scale) <= threshold && diffX <= threshold) || // Vertical neighbor
+               (Mathf.Abs(diffX - scale) <= threshold && Mathf.Abs(diffZ - scale) <= threshold); // Diagonal neighbor
     }
+
 }
