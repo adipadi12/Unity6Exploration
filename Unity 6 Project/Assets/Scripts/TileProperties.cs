@@ -7,13 +7,14 @@ public class TileProperties : MonoBehaviour
     private Color tileColor;
     
     private static TileProperties prevTile; // Tracks the previously selected tile
-    private static TileProperties selectedTile; // Tracks the currently selected tile
+    private static TileProperties selectedTile; // Tracks the currently selected 
 
-    
-
+    [SerializeField] private AudioClip clickingSound;
+    private AudioSource audioSource;
     private void Awake()
     {
         tileRenderer = GetComponent<Renderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void InitializeTile(Color color)
@@ -33,10 +34,12 @@ public class TileProperties : MonoBehaviour
         {
             // No tile previously selected, set this tile as the first selection
             prevTile = this;
+            audioSource.PlayOneShot(clickingSound);
             HighlightTile();
         }
         else if (prevTile == this)
         {
+            audioSource.PlayOneShot(clickingSound);
             // Clicking on the same tile, do nothing
             return;
         }
@@ -52,8 +55,7 @@ public class TileProperties : MonoBehaviour
             if (IsAdjacent(prevTile, selectedTile) &&
                 prevTile.tileColor == selectedTile.tileColor)
             {
-                DestroyTiles(prevTile, selectedTile);
-                
+                DestroyTiles(prevTile, selectedTile);   
             }
             else
             {
@@ -80,6 +82,7 @@ public class TileProperties : MonoBehaviour
     private void DestroyTiles(TileProperties tile1, TileProperties tile2)
     {
         ScoreManager.Instance.AddScore(1); //instance is using this function to update the score outside of this script
+        //Debug.Log("Play destroy sound");
         Destroy(tile1.gameObject);
         Destroy(tile2.gameObject);
     }

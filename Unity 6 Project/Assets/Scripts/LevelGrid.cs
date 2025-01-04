@@ -6,7 +6,7 @@ public class LevelGrid : MonoBehaviour
 {
     [SerializeField] private Transform tilePrefab; // Assign the Tile prefab in the Unity Inspector
     [SerializeField] private Transform gridParent; // Parent object to organize tiles
-    [SerializeField] private Button restartButton;
+    //[SerializeField] private Button restartButton;
 
     private GridSystem gridSystem;
 

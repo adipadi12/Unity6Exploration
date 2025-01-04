@@ -6,6 +6,9 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; } // Singleton instance
     public TextMeshProUGUI scoreText; // Reference to the UI Text
 
+    [SerializeField] private AudioClip destroySound; // Assign this in the Inspector
+    private AudioSource audioSource;
+
     private int score = 0;
 
     private void Awake()
@@ -18,11 +21,13 @@ public class ScoreManager : MonoBehaviour
         {
             Instance = this;
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void AddScore(int points)
     {
         score += points;
+        audioSource.PlayOneShot(destroySound);
         scoreText.text = score.ToString();
     }
 }
