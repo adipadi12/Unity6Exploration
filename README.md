@@ -3,7 +3,7 @@ How to Play: https://github.com/user-attachments/assets/9164e8cc-5255-43ab-abe7-
 just fire up the following link on itch and start playing on browser. https://adipadithedawg.itch.io/grid-matcher
 
 Setup Instructions: pull the project from this github repo and run on Unity6 to avoid any dependency issues. but all are pre-existing
-libraries so it shouldn't cause any issues in previous versions.
+libraries so it shouldn't cause any issues in previous versions. inside the unity6 project there are Assets, Libraries, Packages and Build WebGL. access any of them to see the work i've done
 
 Challenges and Solutions: 
 ![alt text](image.png)
