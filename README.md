@@ -13,3 +13,4 @@ tile prefab and fed it to the new tile spawned in one of the parameters so it sp
 
 External Resources: The grid system foundation was created using a course on udemy by code monket for a turn based combat strategy game.
 i was working on it before so i just refactored the grid logic so it can be used along with this project while following clean code guidelines
+and help from chatGPT. for the materials i used textures from freepbr.com and just made materials optimized for unity URP out of those
