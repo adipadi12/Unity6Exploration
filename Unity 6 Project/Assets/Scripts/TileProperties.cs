@@ -7,8 +7,8 @@ public class TileProperties : MonoBehaviour
     private Renderer tileRenderer;
     private Material tileMaterial;
     
-    private static TileProperties prevTile; // Tracks the previously selected tile
-    private static TileProperties selectedTile; // Tracks the currently selected 
+    private static TileProperties prevTile; //  the previously selected tile
+    private static TileProperties selectedTile; //  the currently selected 
 
     [SerializeField] private AudioClip clickingSound;
     private float scale = 1.1f;
@@ -24,7 +24,7 @@ public class TileProperties : MonoBehaviour
         if (material != null)
         {
             tileMaterial = material;
-            tileRenderer.material = material;
+            tileRenderer.material = material; //calling the renderer of the tile in this function to change its material
         }
         else
         {
@@ -41,7 +41,7 @@ public class TileProperties : MonoBehaviour
     {
         if (prevTile == null)
         {
-            // No tile previously selected, set this tile as the first selection
+            // no tile previously selected so set this tile as the first selection
             prevTile = this;
             audioSource.PlayOneShot(clickingSound);
             HighlightTile();
@@ -49,27 +49,27 @@ public class TileProperties : MonoBehaviour
         else if (prevTile == this)
         {
             audioSource.PlayOneShot(clickingSound);
-            // Clicking on the same tile, do nothing
+            // clicking on the same tile do nothing
             return;
         }
         else
         {
-            // Reset the color of the previously selected tile before selecting a new one
+            // reset the color of the previously selected tile before selecting a new one
             prevTile.ResetMaterial();
 
-            // A tile was previously selected, and now another tile is clicked
+            // tile was previously selected now another tile is clicked
             selectedTile = this;
             audioSource.PlayOneShot(clickingSound);
             HighlightTile();
 
-            // Check for adjacency and color match
+            //for adjacency and color match
             if (IsAdjacent(prevTile, selectedTile) &&
                 prevTile.tileMaterial == selectedTile.tileMaterial)
-            {
+            { 
                 DestroyTiles(prevTile, selectedTile);
             }
 
-            // Update the previous tile to the current tile
+            // update the previous tile to the current tile
             prevTile = selectedTile;
         }
     }
@@ -77,12 +77,12 @@ public class TileProperties : MonoBehaviour
 
     private void HighlightTile()
     {
-        tileRenderer.material.color = Color.black; // Highlight tile
+        tileRenderer.material.color = Color.black; // highlight tile
     }
 
     private void ResetMaterial()
     {
-        tileRenderer.material = tileMaterial; // Reset to the original color
+        tileRenderer.material = tileMaterial; // reset to the original color
     }
 
     private void DestroyTiles(TileProperties tile1, TileProperties tile2)
@@ -91,6 +91,13 @@ public class TileProperties : MonoBehaviour
         //Debug.Log("Play destroy sound");
         Destroy(tile1.gameObject);
         Destroy(tile2.gameObject);
+
+        Vector3 pos1 = tile1.transform.position;
+        Vector3 pos2 = tile2.transform.position;
+
+        ScoreManager.Instance.InstantiateAndMoveTile(pos1, pos1, tile1.transform.rotation); //used the coroutine + function made in spawn manager to 
+        //spawn new tile after destruction of 2. passed the 2 parameters as the same so it doesn't spawn at the midpoint. also gave them the rotation 
+        //values of the original tile which was causing issues
     }
 
     private bool IsAdjacent(TileProperties tile1, TileProperties tile2)
@@ -98,17 +105,18 @@ public class TileProperties : MonoBehaviour
         Vector3 pos1 = tile1.transform.position;
         Vector3 pos2 = tile2.transform.position;
 
-        // Calculate differences in x and z
+        // calculate differences in x and z
         float diffX = Mathf.Abs(pos1.x - pos2.x);
         float diffZ = Mathf.Abs(pos1.z - pos2.z);
 
-        // Floating-point precision threshold
+        // floating-point precision threshold
         float threshold = 0.05f;
 
-        // Check for adjacency
-        return (Mathf.Abs(diffX - scale) <= threshold && diffZ <= threshold) || // Horizontal neighbor
-               (Mathf.Abs(diffZ - scale) <= threshold && diffX <= threshold) || // Vertical neighbor
-               (Mathf.Abs(diffX - scale) <= threshold && Mathf.Abs(diffZ - scale) <= threshold); // Diagonal neighbor
+        // check for adjacency
+        return (Mathf.Abs(diffX - scale) <= threshold && diffZ <= threshold) || // horizontal neighbor
+               (Mathf.Abs(diffZ - scale) <= threshold && diffX <= threshold) || // vertical neighbor
+               (Mathf.Abs(diffX - scale) <= threshold && Mathf.Abs(diffZ - scale) <= threshold); // diagonal neighbor
+
     }
 
 }

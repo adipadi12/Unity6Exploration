@@ -155,6 +155,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 5e578474304dc054491f97b1064e4627, type: 2}
   - {fileID: 2100000, guid: 942f1d5c607d80344942958cd5eea190, type: 2}
   - {fileID: 2100000, guid: b85ea157cc18db747a6507d0c91e6bed, type: 2}
+  scale: 1.1
 --- !u!4 &155563327
 Transform:
   m_ObjectHideFlags: 0
@@ -1043,7 +1044,7 @@ Transform:
   m_GameObject: {fileID: 1828467633}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1230.6874, y: 557.2216, z: -1509.1532}
+  m_LocalPosition: {x: 3.43, y: 0, z: -7.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1063,6 +1064,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1089409565}
   destroySound: {fileID: 8300000, guid: 0672369b712317347910e22e3e2e0429, type: 3}
+  tilePrefab: {fileID: 6257545613213945832, guid: 73b4cae2a65cad9418a45370bb42895d, type: 3}
+  levelGrid: {fileID: 155563326}
 --- !u!82 &1828467636
 AudioSource:
   m_ObjectHideFlags: 0

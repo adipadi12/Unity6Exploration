@@ -16,13 +16,13 @@ public class GridSystem
         this.materials = materials;
     }
 
-    // Converts grid coordinates to world position
+    //grid coordinates to world position
     public Vector3 GetWorldPosition(int x, int z)
     {
         return new Vector3(x, 0, z) * cellSize;
     }
 
-    // Converts world position to grid coordinates
+    // converts world position to grid coordinates
     public Vector2Int GetGridPosition(Vector3 worldPosition)
     {
         int x = Mathf.RoundToInt(worldPosition.x / cellSize);
@@ -30,7 +30,7 @@ public class GridSystem
         return new Vector2Int(x, z);
     }
 
-    // Creates the tiles and places them in the scene
+    //the tiles and places them in the scene
     public void CreateGridObjects(Transform tilePrefab, Transform parent)
     {
         Quaternion tileRotation = tilePrefab.rotation; //to instantiate the tiles in their rotated form
@@ -49,7 +49,7 @@ public class GridSystem
         }
     }
 
-    // Generates a random color for tiles
+    //a random color for tiles
     private Material RandomMaterial()
     {
         if (materials != null && materials.Count > 0)

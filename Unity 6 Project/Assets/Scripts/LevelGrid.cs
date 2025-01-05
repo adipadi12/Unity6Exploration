@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 public class LevelGrid : MonoBehaviour
 {
-    [SerializeField] private Transform tilePrefab; // Assign the Tile prefab in the Unity Inspector
-    [SerializeField] private Transform gridParent; // Parent object to organize tiles
+    [SerializeField] private Transform tilePrefab; 
+    [SerializeField] private Transform gridParent; 
     //[SerializeField] private Button restartButton;
     [SerializeField] private List<Material> materials;
     [SerializeField] private float scale = 1.1f;
@@ -21,12 +21,17 @@ public class LevelGrid : MonoBehaviour
             return;
         }
 
-        gridSystem = new GridSystem(7, 7, scale, materials); // Create a 7x7 grid with a cell size of 1 unit
-        gridSystem.CreateGridObjects(tilePrefab, gridParent); // Generate grid tiles
+        gridSystem = new GridSystem(7, 7, scale, materials); // a 7x7 grid with a cell size of scale
+        gridSystem.CreateGridObjects(tilePrefab, gridParent); // grid tiles
     }
 
-    public void OnButtonClick()
+    public void OnButtonClick() //to reload scene on clicking button
     {
         SceneManager.LoadScene(0);
+    }
+
+    public Material GetRandomMaterial() //to enable new tiles being spawned to use random materials
+    {
+        return materials[Random.Range(0, materials.Count)];
     }
 }
